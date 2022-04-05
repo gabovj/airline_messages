@@ -36,9 +36,6 @@ model_training = st.container()
 
 
 
-# DATA_URL = (
-#     "data/data_final.csv"
-# )
 
 with header:
     st.title('Análisis de sentimientos y Modelo de prediccción de quejas de clientes de "Blue aerolinea"')
@@ -49,16 +46,19 @@ with header:
     st.sidebar.markdown("Esta es un tablero de Streamlit para analizar "
                 "sentimientos de los mensajes recibidos por una aerolínea")
 
-    # @st.cache(persist=True)
-    # def load_data():
-    #     data = pd.read_csv(DATA_URL)
-    #     # data['tweet_created'] = pd.to_datetime(data['tweet_created'])
-    #     return data
-
-    # data = load_data()
-    data = pd.read_csv('data/data_final.csv')
+    
+    data_url = ('data/data_final.csv')
+    data = pd.read_csv(data_url)
     data['tipo'] = data['tipo'].replace('comentario o pregunta', 'comentario_o_pregunta',regex=True)
     print(data['tipo'])
+
+    @st.cache(persist=True)
+    def load_data():
+        data = pd.read_csv(data_url)
+        # data['tweet_created'] = pd.to_datetime(data['tweet_created'])
+        return data
+
+    data = load_data()
 
 with dataset:
     st.header('Base de datos de mensajes recibidos de clientes de una aerolinea')
