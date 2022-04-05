@@ -12,6 +12,7 @@ from PIL import Image
 
 import matplotlib.pyplot as plt
 import nltk
+nltk.download("stopwords")
 from wordcloud import WordCloud, STOPWORDS
 from nltk.corpus import stopwords
 
